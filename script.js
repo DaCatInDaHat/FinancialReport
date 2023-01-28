@@ -47,7 +47,3 @@ function calculateTeamFinanceReport(salaries, team) {
 const financeReport = calculateTeamFinanceReport(salaries, team);
 
 console.log(JSON.stringify(financeReport));
-
-
-
-
