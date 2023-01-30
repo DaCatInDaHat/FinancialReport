@@ -18,35 +18,35 @@ const team = [
     { name: "Napoleon", specialization: "General" }]
 
 function calculateTeamFinanceReport(salaries, team) {
-    const specsQuantity = {};
-    const specsSalary = {};
+    const specializationsInTeamQuantity = {};
+    const specializationsSalary = {};
     const report = {};
     let sum = 0;
 
-    const specsInTeam = team.map(elem => elem.specialization); //take list of specializations in team
+    const specializationsInTeam = team.map(member => member.specialization); //take list of specializations in team
 
     //count quantity of specializations in team
-    for (let spec in specsInTeam) {
-        if (specsQuantity[specsInTeam[spec]]) {
-            specsQuantity[specsInTeam[spec]]++;
+    for (let specialization in specializationsInTeam) {
+        if (specializationsInTeamQuantity[specializationsInTeam[specialization]]) {
+            specializationsInTeamQuantity[specializationsInTeam[specialization]]++;
         }
-        else specsQuantity[specsInTeam[spec]] = 1;
+        else specializationsInTeamQuantity[specializationsInTeam[specialization]] = 1;
     }
 
     //count salaries with tax
-    Object.entries(salaries).forEach(salary => {
-        const salaryWithTax = Math.trunc((salary[1].salary * 100) / (100 - parseInt(salary[1].tax)));
-        specsSalary[salary[0]] = salaryWithTax;
+    Object.entries(salaries).forEach(entry => {
+        const salaryWithTax = Math.trunc((entry[1].salary * 100) / (100 - parseInt(entry[1].tax)));
+        specializationsSalary[entry[0]] = salaryWithTax;
     });
 
     //create list of specializations and their total salaries
-    for (let item in specsSalary) {
-        report[`totalBudget${item}`] = specsSalary[item] * specsQuantity[item];
+    for (let specialization in specializationsSalary) {
+        report[`totalBudget${specialization}`] = specializationsSalary[specialization] * specializationsInTeamQuantity[specialization];
     }
 
     //add to list total salaries for team
-    Object.values(report).forEach(item => {
-        sum += item;
+    Object.values(report).forEach(value => {
+        sum += value;
         report["totalBudgetTeam"] = sum;
     });
 
