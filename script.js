@@ -23,19 +23,14 @@ function calculateTeamFinanceReport(salaries, team) {
     const report = {};
     let sum = 0;
 
-    const specs = team.map(elem => elem.specialization); //take list of specialization
+    const specsInTeam = team.map(elem => elem.specialization); //take list of specializations in team
 
-    //count quantity of specialization
-    for (let spec in specs) {
-        let count = 1;
-        if (specs[spec - 1] === specs[spec]) {
-            count++;
-            specsQuantity[specs[spec]] = count;
+    //count quantity of specializations in team
+    for (let spec in specsInTeam) {
+        if (specsQuantity[specsInTeam[spec]]) {
+            specsQuantity[specsInTeam[spec]]++;
         }
-        else {
-            count = 1;
-            specsQuantity[specs[spec]] = count;
-        }
+        else specsQuantity[specsInTeam[spec]] = 1;
     }
 
     //count salaries with tax
